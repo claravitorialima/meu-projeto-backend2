@@ -40,4 +40,12 @@ export class Player {
         }
         return `O player ${this.name} recebeu ${damage} de dano e agora tem ${this.health} de saúde.`;
     }
+    public takeHeal(heal: number): string {
+        this.health += heal;
+
+        if (this.health > 100) {
+            this.health = 100; // A saúde não ultrapasse 100
+        }
+        return `O player ${this.name} recebeu ${heal} de cura e agora tem ${this.health} de saúde.`;
+    }
 }

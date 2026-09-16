@@ -63,6 +63,16 @@ app.post("/player/damage", (req: Request, res: Response) => {
   })
 })
 
+app.post("/player/heal", (req: Request, res: Response) => {
+  const { heal } = req.body;
+  const healMessage = player.takeHeal(heal);
+  res.json({
+    action: healMessage,
+    currentHealth: player.health,
+    currentLevel: player.level
+  });
+});
+
 // Inicializa o servidor utilizando a porta definida
 // O método listen() faz o servidor começar a "escutar" requisições HTTP
 app.listen(PORT, () => {
@@ -71,4 +81,5 @@ app.listen(PORT, () => {
   console.log(`GET http://localhost:${PORT}/player - Obter informações do Player`);
   console.log(`POST http://localhost:${PORT}/player/attack - Atacar o Player`);
   console.log(`POST http://localhost:${PORT}/player/damage - Causar dano ao Player`);
+  console.log(`POST http://localhost:${PORT}/player/heal - Curar o Player`);
 });
